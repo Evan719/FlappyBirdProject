@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <title>Fly, Charizard, Fly!</title>
+
+    <script src="FlyCharizard.js"></script>
+    <script src="Sprites.js"></script>
+
+    <style>
+        body{
+            width: 100%;
+            height: auto;
+            background: url('images/titlebackground.jpg');
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-size: cover;
+            background-position: 50% 50%;
+            margin: 0 auto;
+            clear: both;
+            position: relative;
+            min-height: 860px;
+        }
+        canvas {
+            display: block;
+            position: absolute;
+            margin: auto;
+            margin-top: 250px;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            border-radius: 5px;
+        }
+        #titlesign{ width: 800px; height: 600px; background-image: url(images/titlescreen2.png); position: relative; left: -46%; top: -110px;}
+        #container{position: absolute; left: 50%; z-index: 999;}
+        #container2{position: absolute; left: 50%;}
+        /*#backgrondwaves{ width: 813px; height: 468px; background-image:url(images/titlebackground.jpg); position: relative; left: -49%; top: 250px;}*/
+    </style>
+</head>
+<body onload="main()">
+<div id="container"><div id="titlesign"></div><div id="myscore">0</div></div>
+<div id="container2"><div id="backgrondwaves"></div></div>
+<noscript>
+    <p>For full functionality of this page it is necessary to enable JavaScript.
+        Here are the <a href="http://www.enable-javascript.com/" target="_blank">
+            instructions how to enable JavaScript in your web browser</a>.</p>
+</noscript>
+</body>
+</html>
