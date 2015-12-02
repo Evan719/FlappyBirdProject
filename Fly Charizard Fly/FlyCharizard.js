@@ -21,6 +21,7 @@ var
     currentScore = 0,
     prevScore = 0,
     okButton,
+    caveButton,
 
     foregroundPosition = 0,
     backgroundPosition = 0,
@@ -32,8 +33,6 @@ var
 
 // State vars
     currentState,
-    splashscreen,
-    gameover,
 
 // Our game has three states: the splash screen, gameplay, and the score display.
     states = {
@@ -252,10 +251,22 @@ function Fish() {
  * @param  {MouseEvent/TouchEvent} evt - the onpress event
  */
 function onpress(evt) {
-    splashscreen = true;
     switch (currentState) {
 
         case states.Splash: // Start the game and update the fish velocity.
+            //Level Select
+            var mouseX = evt.offsetX, mouseY = evt.offsetY;
+            if (mouseX == null || mouseY == null) {
+                mouseX = evt.touches[0].clientX;
+                mouseY = evt.touches[0].clientY;
+            }
+            if (textSprites.caveLevel.x < mouseX && mouseX < textSprites.caveLevel.x + textSprites.caveLevel.width &&
+                textSprites.caveLevel.y < mouseY && mouseY < textSprites.caveLevel.y + textSprites.caveLevel.height) {
+                //var img = new Image();
+                //img.src = "images/CaveBackgroundSprite.png";
+                //img.onload = function () {
+                //    initSprites(this);
+            }
             currentState = states.Game;
             fish.jump();
             break;
@@ -272,14 +283,6 @@ function onpress(evt) {
                 mouseX = evt.touches[0].clientX;
                 mouseY = evt.touches[0].clientY;
             }
-            //Level Select
-            //if(textSprites.caveLevel.x < mouseX && mouseX < textSprites.caveLevel.x + textSprites.caveLevel.width &&
-            //textSprites.caveLevel.y < mouseY && mouseY < textSprites.caveLevel.y + textSprites.caveLevel.height){
-            //    var img = new Image();
-            //    img.src = "images/CaveBackgroundSprite.png";
-            //    img.onload = function () {
-            //        initSprites(this);
-            //};
 
             // Check if within the okButton
             if (okButton.x < mouseX && mouseX < okButton.x + okButton.width &&
@@ -288,6 +291,7 @@ function onpress(evt) {
                 corals.reset();
                 currentState = states.Splash;
                 prevScore = 0;
+                $("#myscore").text(prevScore);
             }
             break;
     }
@@ -340,6 +344,14 @@ function loadGraphics() {
             width: okButtonSprite.width,
             height: okButtonSprite.height
         };
+
+        caveButton = {
+            x: (width - textSprites.caveLevel.width) / 2,
+            y: height - 200,
+            width: textSprites.caveLevel.width,
+            height: textSprites.caveLevel.height
+        };
+
 
         gameLoop();
     };
@@ -412,11 +424,12 @@ function render() {
     foregroundSprite.draw(renderingContext, foregroundPosition, height - foregroundSprite.height);
     foregroundSprite.draw(renderingContext, foregroundPosition + foregroundSprite.width, height - foregroundSprite.height);
 
-    if (!splashscreen) {
+    if (currentState === states.Splash) {
         splash();
     }
-    if(currentState === states.Score){
+    if (currentState === states.Score) {
         okButtonSprite.draw(renderingContext, 115, 220);
+        textSprites.gameOver.draw(renderingContext, 100, 70);
     }
 }
 
@@ -428,7 +441,7 @@ function splash() {
     renderingContext.fillRect(40, 345, 10, 10);
     renderingContext.fillText("Fly Through the Trees and Clouds", 57, 360);
     textSprites.getReady.draw(renderingContext, 100, 70);
-    renderingContext.fillText("Level Select", 120, 275);
+    renderingContext.fillText("Level Select COMING SOON", 70, 275);
     textSprites.forestLevel.draw(renderingContext, 70, 285);
     textSprites.caveLevel.draw(renderingContext, 165, 285);
     renderingContext.fillStyle = "#8BE4FD";

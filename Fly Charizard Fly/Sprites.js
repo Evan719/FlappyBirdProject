@@ -64,7 +64,7 @@ function initSprites(img) {
 
     textSprites = {
         floppyFish: new Sprite(img, 59, 114, 96, 22),
-        gameOver: new Sprite(img, 59, 136, 94, 19),
+        gameOver: new Sprite(img, 62, 164, 94, 20),
         getReady: new Sprite(img, 61, 184, 89, 21),
         forestLevel: new Sprite(img, 0, 118, 45, 15),
         caveLevel: new Sprite(img, 50, 118, 45, 15)
